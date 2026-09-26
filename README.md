@@ -1,10 +1,5 @@
 # Performance Analysis of Type-1 and Type-2 Hypervisors
 
-[![Course](https://img.shields.io/badge/Course-Cloud%20Computing%20%2F%20Computer%20Networks-blue.svg)](#)
-[![Hypervisors](https://img.shields.io/badge/Hypervisors-Proxmox%20VE%20%7C%20VMware%20Workstation-orange.svg)](#)
-[![Benchmark](https://img.shields.io/badge/Benchmark-Sysbench%20CPU%2020k%20Primes-green.svg)](#)
-[![Status](https://img.shields.io/badge/Status-Completed-brightgreen.svg)](#)
-
 ---
 
 ## Executive Summary
@@ -195,7 +190,7 @@ The following table summarizes the benchmark values obtained from both experimen
 
 ### Chart 1: CPU Throughput Comparison (Events / Sec)
 
-IMAGE
+<img width="1098" height="721" alt="CPU_Throughput_Graph" src="https://github.com/user-attachments/assets/c927f138-e153-4b28-b61a-ae1c780ebca1" />
 
 *Figure 3: CPU Throughput comparison showing the measured events per second for both hypervisors.*
 
@@ -203,7 +198,7 @@ IMAGE
 
 ### Chart 2: CPU Latency Metrics Comparison
 
-IMAGE
+<img width="923" height="502" alt="CPU_Latency_Matrix_Graph" src="https://github.com/user-attachments/assets/a0f6c09e-b136-48cd-8d06-484b0ffd6493" />
 
 *Figure 4: Latency comparison showing Min, Avg, 95th Percentile, and Max values across both hypervisors.*
 
@@ -211,7 +206,7 @@ IMAGE
 
 ### Chart 3: Total Events Processed
 
-IMAGE
+<img width="922" height="547" alt="Total_Events_Processed_Graph" src="https://github.com/user-attachments/assets/2bb7d14f-cc43-44b4-99b2-dd477f8a6b57" />
 
 *Figure 5: Total number of events completed during the 10-second benchmark period (17,169 vs 13,650).*
 
