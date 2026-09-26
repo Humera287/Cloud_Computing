@@ -1,5 +1,10 @@
 # Performance Analysis of Type-1 and Type-2 Hypervisors
 
+[![Course](https://img.shields.io/badge/Course-Cloud%20Computing-blue.svg)](#)
+[![Hypervisors](https://img.shields.io/badge/Hypervisors-Proxmox%20VE%20%7C%20VMware%20Workstation-orange.svg)](#)
+[![Benchmark](https://img.shields.io/badge/Benchmark-Sysbench%20CPU%2020k%20Primes-green.svg)](#)
+[![Status](https://img.shields.io/badge/Status-Completed-brightgreen.svg)](#)
+
 ---
 
 ## Executive Summary
@@ -214,7 +219,7 @@ The following table summarizes the benchmark values obtained from both experimen
 
 ### Chart 4: Comprehensive Performance Dashboard
 
-IMAGE
+<img width="833" height="591" alt="Performance_Analysis" src="https://github.com/user-attachments/assets/a21e0afb-ea9c-4739-9c68-1085e0b230f7" />
 
 *Figure 6: Combined performance dashboard showing the major performance measurements for both hypervisor configurations.*
 
