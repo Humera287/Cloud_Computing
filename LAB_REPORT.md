@@ -30,7 +30,15 @@ A Type-1 hypervisor operates directly on the physical hardware of the system wit
 - **Examples**: Proxmox VE (KVM), VMware ESXi, Microsoft Hyper-V (Core), Xen.
 - **Architecture**:
 
-Chart
+ ```
+  [ Guest Virtual Machine (Ubuntu) ]
+                │
+                ▼
+  [ Proxmox VE Hypervisor (KVM Kernel) ]
+                │
+                ▼
+  [ Physical Hardware (CPU, RAM, Disk) ]
+  ```
 
 - **Advantages**: Low virtualization overhead, efficient hardware utilization, direct support for hardware virtualization extensions such as Intel VT-x / AMD-V, better throughput, reduced latency, and suitability for large-scale virtualization environments.
 
@@ -41,7 +49,18 @@ A Type-2 hypervisor works as an application or software layer installed on top o
 - **Examples**: VMware Workstation, Oracle VM VirtualBox, Parallels Desktop.
 - **Architecture**:
 
-Chart
+ ```
+  [ Guest Virtual Machine (Ubuntu) ]
+                │
+                ▼
+  [ VMware Workstation (Hypervisor App) ]
+                │
+                ▼
+  [ Host Operating System (Windows 11) ]
+                │
+                ▼
+  [ Physical Hardware (CPU, RAM, Disk) ]
+  ```
 
 - **Advantages**: Simple installation, convenient graphical interface, easy desktop integration, flexible configuration, and useful networking options.
 - **Disadvantages**: Additional software abstraction, possible host OS resource contention, extra CPU scheduling overhead, and increased context switching delays.
@@ -57,7 +76,7 @@ Both virtual machines were configured with the same major hardware resource limi
 | Resource Parameter | Proxmox VE (Type-1) | VMware Workstation (Type-2) |
 | :--- | :--- | :--- |
 | **Virtual Machine Name** | `CC-Experiment1-type1` | `CC-Experiment1-Type2` |
-| **VM ID / Host Identifier** | `123` | `janzz-virtual-machine` |
+| **VM ID / Host Identifier** | `123` | `humeira-VMware-Virtual-Platform` |
 | **Guest OS** | Ubuntu 24.04.3 LTS AMD64 | Ubuntu Linux 64-bit |
 | **Virtual CPU (vCPU)** | 2 vCPU (1 socket, 2 cores) | 2 vCPU (1 processor, 2 cores) |
 | **CPU Type** | x86-64-v2-AES | Default / Passthrough |
@@ -108,60 +127,24 @@ Both virtual machines were configured with the same major hardware resource limi
 ### Primary Benchmark Outputs
 
 #### 1. Proxmox VE (Type-1 Hypervisor) Output:
-```text
-CPU speed:
-    events per second: 1716.69
 
-General statistics:
-    total time: 10.0004s
-    total number of events: 17169
-
-Latency (ms):
-    min: 0.57
-    avg: 0.58
-    max: 2.78
-    95th percentile: 0.65
-    sum: 9996.45
-
-Threads fairness:
-    events (avg/stddev): 17169.0000/0.00
-    execution time (avg/stddev): 9.9965/0.00
-```
+<img width="633" height="327" alt="Output2 jpg" src="https://github.com/user-attachments/assets/db28fbb1-47c0-4686-8df1-af18f8ad859b" />
 
 #### 2. VMware Workstation (Type-2 Hypervisor) Output:
-```text
-CPU speed:
-    events per second: 1364.78
 
-General statistics:
-    total time: 10.0007s
-    total number of events: 13650
-
-Latency (ms):
-    min: 0.67
-    avg: 0.73
-    max: 4.06
-    95th percentile: 0.89
-    sum: 9992.11
-
-Threads fairness:
-    events (avg/stddev): 13650.0000/0.00
-    execution time (avg/stddev): 9.9921/0.00
-```
-
----
+<img width="902" height="703" alt="Output1 jpg" src="https://github.com/user-attachments/assets/00ffa56c-b3bf-4509-bb33-7c183dbbcf18" />
 
 ## 6. Consolidated Performance Comparison Table
 
 | Performance Metric | Proxmox VE (Type-1) | VMware Workstation (Type-2) | Difference / Delta | Remarks |
 | :--- | :---: | :---: | :---: | :--- |
-| **Total Execution Time** | **10.0004 s** | **10.0007 s** | 0.0003 s | Standard 10-second test window |
-| **Total Events Processed** | **17,169** | **13,650** | **+3,519 events** | **Proxmox VE +25.78% capacity** |
-| **Events per Second (EPS)**| **1,716.69** | **1,364.78** | **+351.91 eps** | **Proxmox VE +25.78% throughput** |
-| **Minimum Latency** | **0.57 ms** | **0.67 ms** | **-0.10 ms** | **Proxmox VE 14.93% lower** |
-| **Average Latency** | **0.58 ms** | **0.73 ms** | **-0.15 ms** | **Proxmox VE 20.55% lower** |
-| **95th Percentile Latency**| **0.65 ms** | **0.89 ms** | **-0.24 ms** | **Proxmox VE 26.97% lower** |
-| **Maximum Latency** | **2.78 ms** | **4.06 ms** | **-1.28 ms** | **Proxmox VE 31.53% lower** |
+| **Total Execution Time** | **10.0004 s** | **10.0005 s** | 0.0001 s | Standard 10-second test window |
+| **Total Events Processed** | **17,169** | **6846** | **+10,323 events** | **Proxmox VE +150.79% capacity** |
+| **Events per Second (EPS)**| **1,716.69** | **684.51** | **+1,032.18 eps** | **Proxmox VE +150.79% throughput** |
+| **Minimum Latency** | **0.57 ms** | **1.31 ms** | **-0.74 ms** | **Proxmox VE 56.49% lower** |
+| **Average Latency** | **0.58 ms** | **1.46 ms** | **-0.88 ms** | **Proxmox VE 60.27% lower** |
+| **95th Percentile Latency**| **0.65 ms** | **1.58 ms** | **-0.93 ms** | **Proxmox VE 58.86% lower** |
+| **Maximum Latency** | **2.78 ms** | **6.16 ms** | **-3.38 ms** | **Proxmox VE 54.87% lower** |
 
 ---
 
@@ -169,15 +152,15 @@ Threads fairness:
 
 ### Figure 1: CPU Throughput (Events/sec)
 
-chart
+<img width="1080" height="721" alt="image" src="https://github.com/user-attachments/assets/52337b0e-95d0-449c-a804-dd5f14d1b354" />
 
 ### Figure 2: Latency Distribution Comparison
 
-chart
+<img width="923" height="502" alt="CPU_Latency_Matrix_Graph" src="https://github.com/user-attachments/assets/1d345c08-aa87-40af-a130-c3d59ae8bfaa" />
 
 ### Figure 3: Total Events Processed
 
-chart
+<img width="922" height="547" alt="Total_Events_Processed_Graph" src="https://github.com/user-attachments/assets/04d7120d-4407-44cc-93fc-5a976e53bc1d" />
 
 ---
 
@@ -185,16 +168,16 @@ chart
 
 ### 8.1 Throughput Analysis
 
-The benchmark evaluates the number of prime-number calculations that can be performed within the fixed 10-second testing period. Proxmox VE completed 17,169 events with a throughput of 1,716.69 events/sec, whereas VMware Workstation completed 13,650 events at 1,364.78 events/sec.
+The benchmark evaluates the number of prime-number calculations that can be performed within the fixed 10-second testing period. Proxmox VE completed 17,169 events with a throughput of 1,716.69 events/sec, whereas VMware Workstation completed 6,846 events at 684.51 events/sec.
 
 - **Percentage Improvement**:
-  $$\text{Improvement} = \frac{1716.69 - 1364.78}{1364.78} \times 100\% = 25.78\%$$
+  $$\text{Improvement} = \frac{1716.69 - 684.51}{684.51} \times 100\% = 150.79\%$$
 
 The measured results show a noticeable difference in CPU processing throughput between the two virtualization environments. The higher event rate indicates that more computational operations were completed during the same test duration.
 
 ### 8.2 Latency & Overhead Analysis
 
-- **Average Latency**: The average latency recorded for Proxmox VE was 0.58 ms per event, while VMware Workstation recorded 0.73 ms. This represents a difference of approximately 0.15 ms between the two configurations.
+- **Average Latency**: The average latency recorded for Proxmox VE was 0.58 ms per event, while VMware Workstation recorded 1.46 ms. This represents a difference of approximately 0.88 ms between the two configurations.
 - **Root Cause**:
   1. **Host OS Context Switches**: In a Type-2 hypervisor, CPU operations are managed through the host Windows operating system, which can introduce additional scheduling and context-switching overhead.
   2. **Privileged Mode Transitions**: Proxmox VE uses KVM-based virtualization and hardware-assisted CPU virtualization, which reduces some of the additional processing required between the guest system and physical hardware.
@@ -205,7 +188,7 @@ The measured results show a noticeable difference in CPU processing throughput b
 
 ## 9. Conclusion
 
-1. **Type-1 hypervisors (Proxmox VE)** showed higher CPU throughput in the conducted experiment, achieving approximately 25.78% more events per second and around 20.55% lower average latency than the tested Type-2 configuration.
+1. **Type-1 hypervisors (Proxmox VE)** showed higher CPU throughput in the conducted experiment, achieving approximately 150.79% more events per second and around 60.27% lower average latency than the tested Type-2 configuration.
 2. The experimental results indicate that the additional host operating system layer and resource management overhead associated with Type-2 virtualization can influence CPU benchmark performance.
 3. Proxmox VE processed a greater number of events within the same 10-second test period and also recorded lower latency values across the measured latency parameters.
 4. The comparison demonstrates that hypervisor architecture can have a measurable effect on CPU-intensive virtual machine workloads.
